@@ -4,6 +4,9 @@ on:
   # schedule:
   #   # Run every day at 2 AM UTC
   #   - cron: '0 2 * * *'
+  push:
+    paths:
+      - ".github/workflows/renovate.yml"
   workflow_dispatch:
     inputs:
       logLevel:
