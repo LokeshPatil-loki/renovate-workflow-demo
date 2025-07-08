@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "customManagers": [
+      {
+      "customType": "jsonata",
+      "fileFormat": "yaml",
+      "managerFilePatterns": [".github/workflows/update-images.yml"],
+      "matchStrings": [
+        "on.workflow_dispatch.inputs.Operator_version{\"currentValue\":default,\"depName\":\"public.ecr.aws/dynatrace/dynatrace-operator\",\"depType\":\"github-actions-input\"}"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver"
+    }
+    ,{
+      "customType": "jsonata",
+      "fileFormat": "yaml",
+      "managerFilePatterns": [".github/workflows/update-images.yml"],
+      "matchStrings": [
+        "$each(on.workflow_dispatch.inputs, function($v, $k) {{\"depName\": \"public.ecr.aws/dynatrace/dynatrace-\" & $lowercase($replace($k,\"_version\",\"\")),\"currentValue\": $v.default, \"depType\": \"github-actions-input\"}})"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "loose"
+    }
+  ]
+}
