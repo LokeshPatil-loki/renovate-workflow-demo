@@ -8,6 +8,13 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 5,
   "recreateWhen": "always",
+  "packageRules": [
+    {
+      "matchFileNames": [".github/workflows/update-images.yml"],
+      "groupName": "update-images-workflow",
+      "matchManagers": ["custom.jsonata"]
+    }
+  ],
   "customManagers": [
       {
       "customType": "jsonata",
