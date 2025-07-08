@@ -16,7 +16,7 @@ on:
       Activegate_version:
         type: string
         required: false
-        default: "1.307.34.20250219-122519" # dynatrace-activegate
+        default: "1.317.26.20250703-113727-fips" # dynatrace-activegate
         description: "Dynatrace OneAgent version tag"
 jobs:
   display:
