@@ -5,6 +5,9 @@
   ],
   "enabledManagers": ["custom.jsonata"],
   "baseBranches": ["test-enabled-managers"],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 5,
+  "recreateWhen": "always",
   "customManagers": [
       {
       "customType": "jsonata",
