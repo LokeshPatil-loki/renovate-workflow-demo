@@ -12,7 +12,6 @@
     {
       "matchFileNames": [".github/workflows/update-images.yml"],
       "groupName": "update-images-workflow",
-      "matchManagers": ["custom.jsonata"]
     }
   ],
   "customManagers": [
