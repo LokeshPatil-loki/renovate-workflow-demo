@@ -1,38 +1,25 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "baseBranches": ["renovate-k8s-manifests"],
-  "enabledManagers": ["custom.jsonata", "kubernetes"],
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": ["custom.jsonata"],
+  "baseBranches": ["test-enabled-managers"],
   "prHourlyLimit": 50,
   "prConcurrentLimit": 10,
   "recreateWhen": "always",
   "packageRules": [
     {
-      "matchFileNames": [".github/workflows/update-images.yaml"],
-      "matchManagers": ["custom.jsonata"],
-      "groupName": "copy-dynatrace-images",
-      "groupSlug": "copy-dynatrace-images"
-    },
-    {
-      "matchManagers": ["kubernetes"],
-      "matchPackageNames": ["public.ecr.aws/dynatrace/**"],
-      "versioning": "docker",
-      "respectLatest": false
+      "matchFileNames": [".github/workflows/update-images.yml"],
+      "groupName": "update-images-workflow",
+      "matchManagers": ["custom.jsonata"]
     }
   ],
-  "kubernetes": {
-    "managerFilePatterns": [
-      "/dynakube-yaml/.*\\.yaml$",
-      "dynakube-yaml/DEV/centralus/dynakube-centralus-dev.yaml"
-    ]
-  },
   "customManagers": [
     {
       "customType": "jsonata",
       "fileFormat": "yaml",
-      "managerFilePatterns": [
-        ".github/workflows/update-images.yaml"
-      ],
+      "managerFilePatterns": [".github/workflows/update-images.yml"],
       "matchStrings": [
         "$each(on.workflow_dispatch.inputs, function($v, $k) {{\"depName\": \"public.ecr.aws/dynatrace/dynatrace-\" & $lowercase($replace($k,\"_version\",\"\")),\"currentValue\": $v.default, \"depType\": \"github-actions-input\"}})"
       ],
@@ -40,4 +27,4 @@
       "versioningTemplate": "docker"
     }
   ]
-};
+}
